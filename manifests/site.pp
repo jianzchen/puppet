@@ -3,10 +3,12 @@
  * Author: CHEN Johnson
  * Version: 1.0
 */
+
 $foo = [ 'one', 'two', 'three' ]
 
 node default {
   include apache
+  include test
   file {
    "/tmp/first.dat" :
     mode => 0666,
@@ -24,6 +26,16 @@ node default {
   file {
   "/tmp/from_master_link.dat" :
     content => template("test/link.dat");
+  }
+  # folder
+  file {
+  "/var/www/html":
+    ensure => directory,
+    source => "puppet:///html_files/html",
+    ignore => '*log*',
+    recurse => true,
+    purge => true,
+    force => true,
   }
 }
 
