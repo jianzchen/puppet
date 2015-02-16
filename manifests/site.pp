@@ -1,3 +1,9 @@
+/* 
+ * Title: Puppet for test
+ * Author: CHEN Johnson
+ * Version: 1.0
+*/
+
 node default {
   file {
    "/tmp/first.dat" :
@@ -12,6 +18,7 @@ node default {
    "/tmp/from_master.dat" :
     source => "puppet:///modules/test/master.dat";
   }
+  # source is a link, copy the content
   file {
   "/tmp/from_master_link.dat" :
     content => template("test/link.dat");
